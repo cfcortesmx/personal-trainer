@@ -7,10 +7,6 @@ import {NewExerciseForm} from '../components/NewExerciseForm';
 import {ScrollView} from 'react-native-gesture-handler';
 
 const AddExerciseScreen = (props, {navigation}) => {
-  const navigateDetails = () => {
-    navigation.navigate('Details');
-  };
-
   return (
     <SafeAreaView style={styles.safeAreaViewStyle}>
       <TopNavigation title="Nuevo Ejercicio" alignment="center" />
