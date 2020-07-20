@@ -1,17 +1,29 @@
 import React from 'react';
 import {Image, StyleSheet} from 'react-native';
-import {Icon, Button, withStyles} from '@ui-kitten/components';
+import {Icon, Button, withStyles, useTheme} from '@ui-kitten/components';
 
-const AddIcon = (props) => (
-  <Icon name="plus-square-outline" {...props} style={styles.icon} />
-);
+const StarIcon = (props) => <Icon {...props} name="star" />;
 
 const ImageListItemComponent = (props) => {
   const {item, eva, style, ...restProps} = props;
+  const theme = useTheme();
+
+  const AddIcon = (props) => (
+    <Icon
+      name="plus-square-outline"
+      {...props}
+      style={[props.style, eva.style.icon, style]}
+      fill={theme['color-primary-default']}
+    />
+  );
 
   if (item.item.type === 'add') {
     return (
-      <Button accessoryLeft={AddIcon} style={[eva.style.imageItem, style]} />
+      <Button
+        accessoryLeft={AddIcon}
+        style={[eva.style.imageItem, style]}
+        onPress={props.onPress}
+      />
     );
   } else {
     return (
@@ -25,13 +37,6 @@ const ImageListItemComponent = (props) => {
   }
 };
 
-const styles = StyleSheet.create({
-  icon: {
-    width: 32,
-    height: 32,
-  },
-});
-
 export const ImageListItem = withStyles(ImageListItemComponent, (theme) => ({
   imageItem: {
     width: 240,
@@ -39,5 +44,10 @@ export const ImageListItem = withStyles(ImageListItemComponent, (theme) => ({
     borderRadius: 8,
     marginHorizontal: 8,
     backgroundColor: theme['color-basic-300'],
+  },
+  icon: {
+    width: 32,
+    height: 32,
+    color: '#000000',
   },
 }));
